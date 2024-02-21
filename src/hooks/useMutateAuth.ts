@@ -45,7 +45,7 @@ export const useMutateAuth = () => {
     {
       onSuccess: () => {
         resetEditedTask()
-        navigate('/')
+        navigate('/login')
       },
       onError: (err: any) => {
         if (err.response.data.message) {
