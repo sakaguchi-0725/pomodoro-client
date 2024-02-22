@@ -23,12 +23,12 @@ export const useError = () => {
       case 'invalid or expired jwt':
         alert('セッションがタイムアウトしました。もう一度ログインしてください。')
         resetEditedTask()
-        navigate('/')
+        navigate('/login')
         break
       case 'missing or malformed jwt':
         alert('セッション情報が無効です。もう一度ログインしてください。')
         resetEditedTask()
-        navigate('/')
+        navigate('/login')
         break
       case 'duplicated key not allowed':
         alert('このメールアドレスは、既に使用されています。他のアドレスを使用してください。')

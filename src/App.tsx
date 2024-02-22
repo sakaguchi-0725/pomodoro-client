@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Todo } from "./components/pages/Todo";
+import { Todo } from "./components/pages/todo/Todo";
 import axios from 'axios'
 import { CsrfToken } from "./types";
 import { Signup } from "./components/pages/auth/Signup";
 import { Login } from "./components/pages/auth/Login";
+import { MainLayout } from "./components/layout/MainLayout";
 
 function App() {
   useEffect(() => {
@@ -23,7 +24,7 @@ function App() {
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/todo" element={<Todo />} />
+        <Route path="/todo" element={<MainLayout children={<Todo />} />} />
       </Routes>
     </BrowserRouter>
   );
