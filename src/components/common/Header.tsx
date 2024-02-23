@@ -16,12 +16,12 @@ export function Header() {
     queryClient.removeQueries(['tasks'])
   }
   return (
-    <header className="bg-white">
+    <header className="bg-zinc-50">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
-            <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+        <div className="flex items-center lg:flex-1">
+          <a href="#" className="flex items-center -m-1.5 p-1.5">
+            <img className="h-10 w-auto mr-2" src="src/assets/logo.png" alt="Pomodoro Logo" />
+            <span className="text-lg font-medium">Pomodoro</span>
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -35,11 +35,11 @@ export function Header() {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Features
+          <a href="/pomodoro" className="text-sm font-semibold leading-6 text-gray-900">
+            Pomodoro
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Marketplace
+          <a href="/todo" className="text-sm font-semibold leading-6 text-gray-900">
+            Todo
           </a>
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
             Company

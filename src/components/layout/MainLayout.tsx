@@ -9,8 +9,10 @@ export const MainLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Header />
-      <main>
-        {children}
+      <main className="bg-zinc-50 h-screen">
+        <div className="flex flex-col items-center mx-auto px-4 max-w-screen-md pt-5">
+          {children}
+        </div>
       </main>
     </>
   )
