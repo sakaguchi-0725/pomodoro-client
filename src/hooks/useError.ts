@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import useStore from "../store"
+import useStore from "../store/task"
 import { CsrfToken } from "../types"
 import axios from "axios"
 

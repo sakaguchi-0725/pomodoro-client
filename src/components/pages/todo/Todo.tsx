@@ -1,4 +1,4 @@
-import useStore from "../../../store"
+import useStore from "../../../store/task"
 import { useQueryTasks } from "../../../hooks/useQueryTasks"
 import { useMutateTask } from "../../../hooks/useMutateTask"
 import { FormEvent } from "react"
