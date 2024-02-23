@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { Task } from "../../../../types";
-import useStore from "../../../../store";
+import useStore from "../../../../store/task";
 import { useMutateTask } from "../../../../hooks/useMutateTask";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 
