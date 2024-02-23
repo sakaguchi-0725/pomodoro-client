@@ -5,7 +5,7 @@ type EditedTime = {
   focusTime: number
 }
 
-type TimeSettings = {
+export type TimeSettings = {
   pomodoro: number
   shortBreak: number
   longBreak: number

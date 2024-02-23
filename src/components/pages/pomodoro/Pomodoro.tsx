@@ -4,6 +4,7 @@ import { TimerType } from '../../../types'
 import useStore from '../../../store/time'
 import { useCowntdown } from '../../../hooks/useCountdown'
 import { Card } from '../../common/Card'
+import { ArrowPathIcon } from '@heroicons/react/24/outline'
 
 const formatTime = (seconds: number) => {
   const minutes = Math.floor(seconds /60)
@@ -18,7 +19,8 @@ export const Pomodoro = () => {
     isActive,
     activeTimerType,
     toggleIsActive,
-    changeTimerType
+    changeTimerType,
+    resetTimer
   }= useCowntdown()
 
   useEffect(() => {
@@ -45,8 +47,13 @@ export const Pomodoro = () => {
               Long Break
           </button>
         </div>
-        <h1 className='py-4' style={{ fontSize: '5rem' }}>{formatTime(seconds)}</h1>
-        <button className='start-button' onClick={() => toggleIsActive()}>{!isActive ? 'Start' : 'Pause'}</button>
+        <h1 className='py-5' style={{ fontSize: '6rem' }}>{formatTime(seconds)}</h1>
+        <div className='flex justify-center items-center'>
+          <button className='start-button' onClick={() => toggleIsActive()}>{!isActive ? 'Start' : 'Pause'}</button>
+          <button className='ml-4 flex justify-center items-center' onClick={resetTimer}>
+            <ArrowPathIcon className='w-9 h-9' />
+          </button>
+        </div>
       </Card>
     </>
   )

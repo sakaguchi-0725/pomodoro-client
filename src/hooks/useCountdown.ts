@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react"
-import useStore from "../store/time"
+import useStore, { TimeSettings } from "../store/time"
 import { TimerType } from "../types"
+
+const getTimeInSeconds = (timerType: TimerType, settings: TimeSettings) => {
+  return {
+    [TimerType.POMODORO]: settings.pomodoro * 60,
+    [TimerType.SHORT_BREAK]: settings.shortBreak * 60,
+    [TimerType.LONG_BREAK]: settings.longBreak * 60
+  }[timerType]
+}
 
 export const useCowntdown = () => {
   const { timeSettings } = useStore()
@@ -9,13 +17,7 @@ export const useCowntdown = () => {
   const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
-    const timeInSeconds = {
-      [TimerType.POMODORO]: timeSettings.pomodoro * 60,
-      [TimerType.SHORT_BREAK]: timeSettings.shortBreak * 60,
-      [TimerType.LONG_BREAK]: timeSettings.longBreak * 60
-    }[activeTimerType]
-
-    setSeconds(timeInSeconds)
+    setSeconds(getTimeInSeconds(activeTimerType, timeSettings))
   }, [activeTimerType, timeSettings])
 
   useEffect(() => {
@@ -38,6 +40,8 @@ export const useCowntdown = () => {
 
   const changeTimerType = (type: TimerType) => setActiveTimerType(type)
 
-  return { seconds, isActive, activeTimerType, toggleIsActive, changeTimerType }
+  const resetTimer = () => setSeconds(getTimeInSeconds(activeTimerType, timeSettings))
+
+  return { seconds, isActive, activeTimerType, toggleIsActive, changeTimerType, resetTimer }
 }
 
