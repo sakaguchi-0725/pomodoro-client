@@ -29,7 +29,7 @@ export const Pomodoro = () => {
         setSeconds(timeSettings.shortBreak * 60)
         break
       case TimerType.LONG_BREAK:
-        setSeconds(timeSettings.shortBreak * 60)
+        setSeconds(timeSettings.longBreak * 60)
         break
       default:
         setSeconds(timeSettings.pomodoro * 60)
