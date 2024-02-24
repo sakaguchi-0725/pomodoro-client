@@ -25,5 +25,5 @@ export const useMutateTime = () => {
     }
   )
 
-  return storeTimeMutation
+  return { storeTimeMutation }
 }
