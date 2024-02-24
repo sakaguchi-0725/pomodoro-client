@@ -32,8 +32,8 @@ export const useCowntdown = () => {
       clearInterval(interval)
       switch (activeTimerType) {
         case TimerType.POMODORO:
-          setPomodoroCount(count => count === 2 ? 0 : count + 1)
-          setActiveTimerType(pomodoroCount === 2 ? TimerType.LONG_BREAK : TimerType.SHORT_BREAK)
+          setPomodoroCount(count => count === timeSettings.longBreakInterval ? 0 : count + 1)
+          setActiveTimerType(pomodoroCount === timeSettings.longBreakInterval ? TimerType.LONG_BREAK : TimerType.SHORT_BREAK)
           break
         case TimerType.SHORT_BREAK:
         case TimerType.LONG_BREAK:

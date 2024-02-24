@@ -1,10 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import 'react-circular-progressbar/dist/styles.css'
 import { TimerType } from '../../../types'
 import useStore from '../../../store/time'
 import { useCowntdown } from '../../../hooks/useCountdown'
 import { Card } from '../../common/Card'
-import { ArrowPathIcon } from '@heroicons/react/24/outline'
+import { ArrowPathIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
+import { Modal } from '../../common/Modal'
+import { TimeSettings } from './TimeSettings'
 
 const formatTime = (seconds: number) => {
   const minutes = Math.floor(seconds /60)
@@ -14,6 +16,8 @@ const formatTime = (seconds: number) => {
 
 export const Pomodoro = () => {
   const getTimeSettings = useStore((state) => state.getTimeSettings)
+  const [open, setOpen] = useState(false)
+  const cancelButtonRef = useRef(null)
   const {
     seconds,
     isActive,
@@ -53,8 +57,14 @@ export const Pomodoro = () => {
           <button className='ml-4 flex justify-center items-center' onClick={resetTimer}>
             <ArrowPathIcon className='w-9 h-9' />
           </button>
+          <button className='ml-4 flex justify-center items-center' onClick={() => setOpen(true)}>
+            <Cog6ToothIcon className='w-9 h-9' />
+          </button>
         </div>
       </Card>
+      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef}>
+        <TimeSettings setOpen={setOpen} cancelButtonRef={cancelButtonRef} />
+      </Modal>
     </>
   )
 }
