@@ -15,6 +15,7 @@ export const useCowntdown = () => {
   const [seconds, setSeconds] = useState(0)
   const [activeTimerType, setActiveTimerType] = useState(TimerType.POMODORO)
   const [isActive, setIsActive] = useState(false)
+  const [pomodoroCount, setPomodoroCount] = useState(0)
 
   useEffect(() => {
     setSeconds(getTimeInSeconds(activeTimerType, timeSettings))
@@ -23,10 +24,23 @@ export const useCowntdown = () => {
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | undefined = undefined
 
-    if (isActive) {
+    if (isActive && seconds > 0) {
       interval = setInterval(() => {
         setSeconds(prevSeconds => Math.max(prevSeconds - 1, 0))
       }, 1000)
+    } else if (seconds === 0 && isActive) {
+      clearInterval(interval)
+      switch (activeTimerType) {
+        case TimerType.POMODORO:
+          setPomodoroCount(count => count === 2 ? 0 : count + 1)
+          setActiveTimerType(pomodoroCount === 2 ? TimerType.LONG_BREAK : TimerType.SHORT_BREAK)
+          break
+        case TimerType.SHORT_BREAK:
+        case TimerType.LONG_BREAK:
+          setActiveTimerType(TimerType.POMODORO)
+          break
+      }
+      setIsActive(timeSettings.isAutoTimer)
     }
 
     return () => {
@@ -34,13 +48,16 @@ export const useCowntdown = () => {
         clearInterval(interval)
       }
     }
-  }, [isActive])
+  }, [isActive, seconds])
 
   const toggleIsActive = () => setIsActive(!isActive)
 
   const changeTimerType = (type: TimerType) => setActiveTimerType(type)
 
-  const resetTimer = () => setSeconds(getTimeInSeconds(activeTimerType, timeSettings))
+  const resetTimer = () => {
+    setSeconds(getTimeInSeconds(activeTimerType, timeSettings))
+    setIsActive(false)
+  }
 
   return { seconds, isActive, activeTimerType, toggleIsActive, changeTimerType, resetTimer }
 }
