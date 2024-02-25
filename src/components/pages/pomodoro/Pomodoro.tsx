@@ -7,6 +7,7 @@ import { Card } from '../../common/Card'
 import { ArrowPathIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { Modal } from '../../common/Modal'
 import { TimeSettings } from './TimeSettings'
+import { useQueryTasks } from '../../../hooks/useQueryTasks'
 
 const formatTime = (seconds: number) => {
   const minutes = Math.floor(seconds /60)
@@ -17,7 +18,9 @@ const formatTime = (seconds: number) => {
 export const Pomodoro = () => {
   const getTimeSettings = useStore((state) => state.getTimeSettings)
   const [open, setOpen] = useState(false)
+  const [taskId, setTaskId] = useState('')
   const cancelButtonRef = useRef(null)
+  const { data } = useQueryTasks()
   const {
     seconds,
     isActive,
@@ -25,7 +28,7 @@ export const Pomodoro = () => {
     toggleIsActive,
     changeTimerType,
     resetTimer
-  }= useCowntdown()
+  }= useCowntdown(taskId)
 
   useEffect(() => {
     getTimeSettings()
@@ -51,7 +54,15 @@ export const Pomodoro = () => {
               Long Break
           </button>
         </div>
-        <h1 className='py-5' style={{ fontSize: '6rem' }}>{formatTime(seconds)}</h1>
+        <h1 className='mt-2' style={{ fontSize: '6rem' }}>{formatTime(seconds)}</h1>
+        <div className='mb-5'>
+          <select name="task" value={taskId} onChange={(e) => setTaskId(e.target.value)} className='border border-gray-300 py-1 rounded w-44'>
+            <option value="">タスクを選択</option>
+            {data?.map((task) => (
+              <option key={task.id} value={task.id}>{task.title}</option>
+            ))}
+          </select>
+        </div>
         <div className='flex justify-center items-center'>
           <button className='start-button' onClick={() => toggleIsActive()}>{!isActive ? 'Start' : 'Pause'}</button>
           <button className='ml-4 flex justify-center items-center' onClick={resetTimer}>

@@ -11,7 +11,7 @@ const getTimeInSeconds = (timerType: TimerType, settings: TimeSettings) => {
   }[timerType]
 }
 
-export const useCowntdown = () => {
+export const useCowntdown = (taskId: string) => {
   const { timeSettings } = useStore()
   const { storeTimeMutation } = useMutateTime()
   const [seconds, setSeconds] = useState(0)
@@ -33,7 +33,8 @@ export const useCowntdown = () => {
     } else if (seconds === 0 && isActive) {
       if (activeTimerType === TimerType.POMODORO) {
         storeTimeMutation.mutate({
-          focus_time: timeSettings.pomodoro
+          focus_time: timeSettings.pomodoro,
+          task_id: taskId ? Number(taskId) : null
         })
       }
       clearInterval(interval)
