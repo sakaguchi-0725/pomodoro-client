@@ -6,7 +6,7 @@ import { useCowntdown } from '../../../hooks/useCountdown'
 import { Card } from '../../common/Card'
 import { ArrowPathIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { Modal } from '../../common/Modal'
-import { TimeSettings } from './TimeSettings'
+import { TimeSettings } from './components/TimeSettings'
 import { useQueryTasks } from '../../../hooks/useQueryTasks'
 
 const formatTime = (seconds: number) => {
