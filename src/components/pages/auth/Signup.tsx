@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react"
-import { useMutateAuth } from "../../../hooks/useMutateAuth"
+import { useMutateAuth } from "../../../hooks/auth/useMutateAuth"
 
 export const Signup = () => {
   const [email, setEmail] = useState('')

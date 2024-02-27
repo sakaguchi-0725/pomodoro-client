@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query"
-import { useError } from "./useError"
-import useStore from "../store/time"
-import { Time } from "../types"
+import { useError } from "../useError"
+import useStore from "../../store/time"
+import { Time } from "../../types"
 import axios from "axios"
 
 export const useMutateTime = () => {

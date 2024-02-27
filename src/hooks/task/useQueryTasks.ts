@@ -1,6 +1,6 @@
 import axios from "axios"
-import { useError } from "./useError"
-import { Task } from "../types"
+import { useError } from "../useError"
+import { Task } from "../../types"
 import { useQuery } from "@tanstack/react-query"
 
 export const useQueryTasks = () => {

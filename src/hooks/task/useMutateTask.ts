@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useError } from "./useError"
-import useStore from "../store/task"
-import { Task } from "../types"
+import { useError } from "../useError"
+import useStore from "../../store/task"
+import { Task } from "../../types"
 import axios from "axios"
 
 export const useMutateTask = () => {

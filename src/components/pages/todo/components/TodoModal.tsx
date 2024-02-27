@@ -1,6 +1,6 @@
 import React, { SetStateAction } from 'react'
 import useStore from '../../../../store/task'
-import { useMutateTask } from "../../../../hooks/useMutateTask"
+import { useMutateTask } from "../../../../hooks/task/useMutateTask"
 
 type TodoModalProps = {
   setOpen: React.Dispatch<SetStateAction<boolean>>

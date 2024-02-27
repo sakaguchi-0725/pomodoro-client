@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import 'react-circular-progressbar/dist/styles.css'
 import { TimerType } from '../../../types'
 import useStore from '../../../store/time'
-import { useCowntdown } from '../../../hooks/useCountdown'
+import { useCowntdown } from '../../../hooks/time/useCountdown'
 import { Card } from '../../common/Card'
 import { ArrowPathIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { Modal } from '../../common/Modal'
 import { TimeSettings } from './components/TimeSettings'
-import { useQueryTasks } from '../../../hooks/useQueryTasks'
+import { useQueryTasks } from '../../../hooks/task/useQueryTasks'
 
 const formatTime = (seconds: number) => {
   const minutes = Math.floor(seconds /60)

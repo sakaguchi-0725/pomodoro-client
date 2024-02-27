@@ -1,4 +1,4 @@
-import { useQueryTasks } from "../../../hooks/useQueryTasks"
+import { useQueryTasks } from "../../../hooks/task/useQueryTasks"
 import { useRef, useState } from "react"
 import { TaskItem } from "./components/TodoItem"
 import { Card } from "../../common/Card"

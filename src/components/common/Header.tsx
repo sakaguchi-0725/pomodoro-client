@@ -4,7 +4,7 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { useMutateAuth } from '../../hooks/useMutateAuth'
+import { useMutateAuth } from '../../hooks/auth/useMutateAuth'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function Header() {

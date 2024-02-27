@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import useStore, { TimeSettings } from "../store/time"
-import { TimerType } from "../types"
+import useStore, { TimeSettings } from "../../store/time"
+import { TimerType } from "../../types"
 import { useMutateTime } from "./useMutateTime"
 
 const getTimeInSeconds = (timerType: TimerType, settings: TimeSettings) => {
