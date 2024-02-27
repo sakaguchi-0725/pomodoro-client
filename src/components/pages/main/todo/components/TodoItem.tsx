@@ -1,7 +1,7 @@
 import { FC, memo, Fragment, SetStateAction } from "react";
-import { Task } from "../../../../types";
-import useStore from "../../../../store/task";
-import { useMutateTask } from "../../../../hooks/task/useMutateTask";
+import { Task } from "../../../../../types";
+import useStore from "../../../../../store/task";
+import { useMutateTask } from "../../../../../hooks/task/useMutateTask";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { Menu, Transition } from "@headlessui/react";
 

@@ -1,7 +1,7 @@
 import { Dialog } from '@headlessui/react'
 import React, { useState } from 'react'
-import { ToggleSwitch } from '../../../common/ToggleSwitch'
-import useStore from '../../../../store/time'
+import { ToggleSwitch } from '../../../../common/ToggleSwitch'
+import useStore from '../../../../../store/time'
 
 type TimeSettingsProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>

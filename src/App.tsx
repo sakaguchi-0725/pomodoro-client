@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import './App.css'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Todo } from "./components/pages/todo/Todo";
 import axios from 'axios'
 import { CsrfToken } from "./types";
 import { Signup } from "./components/pages/auth/Signup";
 import { Login } from "./components/pages/auth/Login";
 import { MainLayout } from "./components/layout/MainLayout";
-import { Pomodoro } from "./components/pages/pomodoro/Pomodoro";
+import Main from "./components/pages/main/Main";
+import Report from "./components/pages/report/Report";
 
 function App() {
   useEffect(() => {
@@ -26,8 +26,8 @@ function App() {
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/todo" element={<MainLayout children={<Todo />} />} />
-        <Route path="/pomodoro" element={<MainLayout children={<Pomodoro />} />} />
+        <Route path="/" element={<MainLayout children={<Main />} />} />
+        <Route path="/report" element={<MainLayout children={<Report />} />} />
       </Routes>
     </BrowserRouter>
   );

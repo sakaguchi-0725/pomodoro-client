@@ -35,11 +35,8 @@ export function Header() {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
-          <a href="/pomodoro" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="/" className="text-sm font-semibold leading-6 text-gray-900">
             Pomodoro
-          </a>
-          <a href="/todo" className="text-sm font-semibold leading-6 text-gray-900">
-            Todo
           </a>
           <a href="/report" className="text-sm font-semibold leading-6 text-gray-900">
             Report
@@ -72,16 +69,10 @@ export function Header() {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <a
-                  href="/pomodoro"
+                  href="/"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Pomodoro
-                </a>
-                <a
-                  href="/todo"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Todo
                 </a>
                 <a
                   href="/report"

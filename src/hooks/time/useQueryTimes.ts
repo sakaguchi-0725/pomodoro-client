@@ -1,6 +1,6 @@
 import axios from "axios"
-import { useError } from "./useError"
-import { Time } from "../types"
+import { useError } from "../useError"
+import { Time } from "../../types"
 import { useQuery } from "@tanstack/react-query"
 
 export const useQueryTimes = () => {

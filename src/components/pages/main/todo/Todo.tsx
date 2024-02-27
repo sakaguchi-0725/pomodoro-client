@@ -1,8 +1,8 @@
-import { useQueryTasks } from "../../../hooks/task/useQueryTasks"
+import { useQueryTasks } from "../../../../hooks/task/useQueryTasks"
 import { useRef, useState } from "react"
 import { TaskItem } from "./components/TodoItem"
-import { Card } from "../../common/Card"
-import { Modal } from "../../common/Modal"
+import { Card } from "../../../common/Card"
+import { Modal } from "../../../common/Modal"
 import { TodoModal } from "./components/TodoModal"
 
 export const Todo = () => {

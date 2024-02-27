@@ -10,7 +10,7 @@ export const MainLayout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <Header />
       <main className="bg-zinc-50 h-screen">
-        <div className="flex flex-col items-center mx-auto px-4 max-w-screen-md pt-5">
+        <div className="flex flex-col items-center mx-auto px-4 max-w-screen-md pt-2">
           {children}
         </div>
       </main>
