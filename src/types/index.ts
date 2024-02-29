@@ -14,7 +14,6 @@ export enum TimerType {
 export type Time = {
   id: number
   focus_time: number
-  task_id: number | null
   created_at: Date
   updated_at: Date
 }
