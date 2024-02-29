@@ -6,7 +6,6 @@ import { Card } from '../../../common/Card'
 import { ArrowPathIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { Modal } from '../../../common/Modal'
 import { TimeSettings } from './components/TimeSettings'
-import { useQueryTasks } from '../../../../hooks/task/useQueryTasks'
 
 const formatTime = (seconds: number) => {
   const minutes = Math.floor(seconds /60)
@@ -18,7 +17,6 @@ export const Pomodoro = () => {
   const getTimeSettings = useStore((state) => state.getTimeSettings)
   const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef(null)
-  const { data } = useQueryTasks()
   const {
     seconds,
     isActive,
