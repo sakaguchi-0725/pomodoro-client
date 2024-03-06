@@ -14,7 +14,7 @@ export const useMutateAuth = () => {
       await axios.post(`${import.meta.env.VITE_API_BASE_URL}/login`, user),
     {
       onSuccess: () => {
-        navigate("/todo")
+        navigate("/")
       },
       onError: (err: any) => {
         if (err.response.data.message) {
