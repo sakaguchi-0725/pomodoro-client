@@ -1,36 +1,33 @@
 import { Card } from '../../common/Card'
 import { useQueryReport } from '../../../hooks/time/useQueryReport'
 import { useEffect, useState } from 'react'
-import { FormattedWeeklyReport, ReportParams } from '../../../types'
-import { format, startOfWeek, endOfDay, subWeeks } from 'date-fns'
+import { ReportParams } from '../../../types'
 import { formatWeeklyReportData } from './utils/formatReportData'
 import { WeeklyReportGraph } from './components/WeeklyReportGraph'
-
-const getStartDate = (): string => {
-  const threeWeekBefore = subWeeks(new Date(), 3)
-  const lastMonday = startOfWeek(threeWeekBefore, { weekStartsOn: 1 })
-
-  return format(lastMonday, 'yyyy-MM-dd')
-}
-
-const getEndDate = (): string => {
-  return format(endOfDay(new Date()), 'yyyy-MM-dd')
-}
+import { getEndDate, getNextStartDate } from './utils/reportDateUtils'
+import useStore from '../../../store/report'
 
 const Report = () => {
-  const startDate = getStartDate()
-  const endDate = getEndDate()
-  const reportParams: ReportParams = {
+  const today = new Date()
+  const [startDate, setStartDate] = useState(getNextStartDate(today))
+  const [endDate, setEndDate] = useState(getEndDate(today))
+  const [reportParams, setReportParams] = useState<ReportParams>({
     report_type: 'all',
     start_date: startDate,
     end_date: endDate
-  }
-  const [weeklyReport, setWeeklyReport] = useState<FormattedWeeklyReport[]>([])
+  })
+  const addWeeklyReportData = useStore((state) => state.addWeeklyReportData)
+  
   const { data, isLoading } = useQueryReport(reportParams)
   useEffect(() => {
-    if (data?.weekly_report) {
-      const formattedData = formatWeeklyReportData(data.weekly_report)
-      setWeeklyReport(formattedData)
+    if (!isLoading) {
+      if (data?.weekly_report) {
+        const formattedData = formatWeeklyReportData(data.weekly_report, startDate, endDate)
+        addWeeklyReportData(formattedData)
+      } else {
+        const formattedData = formatWeeklyReportData([], startDate, endDate)
+        addWeeklyReportData(formattedData)
+      }
     }
   }, [data])
 
@@ -49,7 +46,14 @@ const Report = () => {
         </div>
       </Card>
       <Card>
-        <WeeklyReportGraph weeklyReport={weeklyReport} isLoading={isLoading} />
+        <WeeklyReportGraph
+          isLoading={isLoading}
+          startDate={startDate}
+          endDate={endDate}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+          setReportParams={setReportParams}
+        />
       </Card>
     </>
   )

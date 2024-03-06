@@ -1,18 +1,14 @@
 import { FormattedWeeklyReport, FormattedWeeklyReportItem, WeeklyReport } from "../../../../types"
 import { parseISO, format, startOfWeek, endOfWeek, addDays, eachDayOfInterval } from 'date-fns'
 
-export const formatWeeklyReportData = (data: WeeklyReport[]): FormattedWeeklyReport[] => {
-  if (data.length === 0) {
-    return []
-  }
-
-  const start = data.length > 0 ? startOfWeek(parseISO(data[0].date), { weekStartsOn: 1 }) : new Date()
-  const end = data.length > 0 ? endOfWeek(parseISO(data[data.length - 1].date), { weekStartsOn: 1 }) : new Date()
+export const formatWeeklyReportData = (data: WeeklyReport[], startDateStr: string, endDateStr: string): FormattedWeeklyReport[] => {
+  const startDate = parseISO(startDateStr)
+  const endDate = parseISO(endDateStr)
   
   const result: FormattedWeeklyReport[] = []
 
-  let currentDate = start
-  while (currentDate <= end) {
+  let currentDate = startOfWeek(startDate, { weekStartsOn: 1 })
+  while (currentDate <= endDate) {
     const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 })
     const weekEnd = endOfWeek(currentDate, { weekStartsOn: 1 })
 
