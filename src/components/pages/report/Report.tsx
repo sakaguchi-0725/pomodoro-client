@@ -1,53 +1,59 @@
-import { Column } from '@ant-design/charts'
 import { Card } from '../../common/Card'
+import { useQueryReport } from '../../../hooks/time/useQueryReport'
+import { useEffect, useState } from 'react'
+import { FormattedWeeklyReport, ReportParams } from '../../../types'
+import { format, startOfWeek, endOfDay, subWeeks } from 'date-fns'
+import { formatWeeklyReportData } from './utils/formatReportData'
+import { WeeklyReportGraph } from './components/WeeklyReportGraph'
+
+const getStartDate = (): string => {
+  const threeWeekBefore = subWeeks(new Date(), 3)
+  const lastMonday = startOfWeek(threeWeekBefore, { weekStartsOn: 1 })
+
+  return format(lastMonday, 'yyyy-MM-dd')
+}
+
+const getEndDate = (): string => {
+  return format(endOfDay(new Date()), 'yyyy-MM-dd')
+}
 
 const Report = () => {
-  const data = [
-    { year: '1991', value: 3 },
-    { year: '1992', value: 4 },
-    { year: '1993', value: 3.5 },
-    { year: '1994', value: 5 },
-    { year: '1995', value: 4.9 },
-    { year: '1996', value: 6 },
-    { year: '1997', value: 7 },
-    { year: '1998', value: 9 },
-    { year: '1999', value: 13 },
-  ]
-
-  const config = {
-    data,
-    height: 400,
-    xField: 'year',
-    yField: 'value',
-    point: {
-      size: 5,
-      shape: 'diamond',
-    },
+  const startDate = getStartDate()
+  const endDate = getEndDate()
+  const reportParams: ReportParams = {
+    report_type: 'all',
+    start_date: startDate,
+    end_date: endDate
   }
+  const [weeklyReport, setWeeklyReport] = useState<FormattedWeeklyReport[]>([])
+  const { data, isLoading } = useQueryReport(reportParams)
+  useEffect(() => {
+    if (data?.weekly_report) {
+      const formattedData = formatWeeklyReportData(data.weekly_report)
+      setWeeklyReport(formattedData)
+    }
+  }, [data])
 
   return (
     <>
       <Card>
         <div className='flex justify-center w-full items-center'>
-          <div className='w-1/3'>
+          <div className='w-1/2 border-r'>
             <p className='pb-2 text-sm text-slate-800'>Total Focus Time</p>
-            <h1 className='text-3xl text-slate-500 font-semibold'>20</h1>
+            <h1 className='text-3xl text-slate-500 font-semibold'>{ data?.total_focus_time ? data?.total_focus_time : 0 } min</h1>
           </div>
-          <div className='w-1/3 border-x'>
-            <p className='pb-2 text-sm text-slate-800'>Total Login Count</p>
-            <h1 className='text-3xl text-slate-500 font-semibold'>20</h1>
-          </div>
-          <div className='w-1/3'>
-            <p className='pb-2 text-sm text-slate-800'>Consecutive Login Count</p>
-            <h1 className='text-3xl text-slate-500 font-semibold'>20</h1>
+          <div className='w-1/2'>
+            <p className='pb-2 text-sm text-slate-800'>Consecutive Days</p>
+            <h1 className='text-3xl text-slate-500 font-semibold'>{ data?.total_focus_time ? data?.consecutive_days : 0 } days</h1>
           </div>
         </div>
       </Card>
       <Card>
-        <Column {...config} />
+        <WeeklyReportGraph weeklyReport={weeklyReport} isLoading={isLoading} />
       </Card>
     </>
   )
 }
 
 export default Report
+

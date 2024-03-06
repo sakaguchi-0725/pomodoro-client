@@ -18,6 +18,40 @@ export type Time = {
   updated_at: Date
 }
 
+export type Report = {
+  total_focus_time: number
+  consecutive_days: number
+  daily_report: DailyReport[]
+  weekly_report: WeeklyReport[]
+}
+
+export type DailyReport = {
+  time: string
+  focus_time: number
+}
+
+export type WeeklyReport = {
+  date: string
+  focus_time: number
+}
+
+export type FormattedWeeklyReportItem = {
+  dayOfWeek: string
+  focusTime: number
+}
+
+export type FormattedWeeklyReport = {
+  startDate: string
+  endDate: string
+  data: FormattedWeeklyReportItem[]
+}
+
+export type ReportParams = {
+  report_type: string
+  start_date: string
+  end_date: string
+}
+
 export type CsrfToken = {
   csrf_token: string
 }
