@@ -29,7 +29,7 @@ export const Todo = () => {
           </ul>
         )}
       </Card>
-      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef}>
+      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef} type="todo">
         <TodoModal setOpen={setOpen} cancelButtonRef={cancelButtonRef} />
       </Modal>
     </>
