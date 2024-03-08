@@ -1,13 +1,22 @@
 import { create } from 'zustand'
-import { FormattedWeeklyReport } from '../../types'
+import { DailyReport, FormattedWeeklyReport } from '../../types'
 
 type State = {
+  dailyReportData: DailyReport[]
+  updateDailyReport: (payload: DailyReport[]) => void,
+  resetDailyReportData: () => void
   weeklyReportData: FormattedWeeklyReport[]
   addWeeklyReportData: (payload: FormattedWeeklyReport[]) => void
   resetWeeklyReportData: () => void
 }
 
 const useStore = create<State>((set) => ({
+  dailyReportData: [],
+  updateDailyReport: (payload) =>
+    set({
+      dailyReportData: payload
+    }),
+  resetDailyReportData: () => set({ dailyReportData: [] }),
   weeklyReportData: [],
   addWeeklyReportData: (payload) => set((state) => {
     const updatedData = payload.reduce((acc, newWeek) => {
