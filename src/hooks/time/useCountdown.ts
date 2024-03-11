@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import useStore, { TimeSettings } from "../../store/time"
 import { TimerType } from "../../types"
 import { useMutateTime } from "./useMutateTime"
+import useCompleteTimer from "./useCompleteTimer"
 
 const getTimeInSeconds = (timerType: TimerType, settings: TimeSettings) => {
   return {
@@ -14,6 +15,7 @@ const getTimeInSeconds = (timerType: TimerType, settings: TimeSettings) => {
 export const useCowntdown = () => {
   const { timeSettings } = useStore()
   const { storeTimeMutation } = useMutateTime()
+  const sendCompleteNotification = useCompleteTimer()
   const [seconds, setSeconds] = useState(0)
   const [activeTimerType, setActiveTimerType] = useState(TimerType.POMODORO)
   const [isActive, setIsActive] = useState(false)
@@ -31,6 +33,7 @@ export const useCowntdown = () => {
         setSeconds(prevSeconds => Math.max(prevSeconds - 1, 0))
       }, 1000)
     } else if (seconds === 0 && isActive) {
+      sendCompleteNotification(activeTimerType)
       if (activeTimerType === TimerType.POMODORO) {
         storeTimeMutation.mutate({
           focus_time: timeSettings.pomodoro,
