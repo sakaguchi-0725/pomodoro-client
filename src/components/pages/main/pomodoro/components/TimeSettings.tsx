@@ -11,6 +11,7 @@ type TimeSettingsProps = {
 export const TimeSettings: React.FC<TimeSettingsProps> = ({ setOpen, cancelButtonRef }) => {
   const { timeSettings } = useStore()
   const setTimeSettings = useStore((state) => state.setTimeSettings)
+  const resetEditedTime = useStore((state) => state.resetEditedTime)
   const [pomodoro, setPomodoro] = useState(timeSettings.pomodoro)
   const [shortBreak, setShortBreak] = useState(timeSettings.shortBreak)
   const [longBreak, setLongBreak] = useState(timeSettings.longBreak)
@@ -26,6 +27,7 @@ export const TimeSettings: React.FC<TimeSettingsProps> = ({ setOpen, cancelButto
       longBreakInterval
     })
     setOpen(false)
+    resetEditedTime()
   }
 
   return (
@@ -44,7 +46,7 @@ export const TimeSettings: React.FC<TimeSettingsProps> = ({ setOpen, cancelButto
                   type="text"
                   className="border border-gray-300 p-2 rounded w-full"
                   value={pomodoro}
-                  onChange={(e) => setPomodoro(Number(e.target.value))}
+                  onChange={(e) => setPomodoro(e.target.value ? Number(e.target.value) : 0)}
                 />
               </div>
               <div className='flex flex-col'>
@@ -54,7 +56,7 @@ export const TimeSettings: React.FC<TimeSettingsProps> = ({ setOpen, cancelButto
                   type="text"
                   className="border border-gray-300 p-2 rounded w-full"
                   value={shortBreak}
-                  onChange={(e) => setShortBreak(Number(e.target.value))}
+                  onChange={(e) => setShortBreak(e.target.value ? Number(e.target.value) : 0)}
                 />
               </div>
               <div className='flex flex-col'>
@@ -64,7 +66,7 @@ export const TimeSettings: React.FC<TimeSettingsProps> = ({ setOpen, cancelButto
                   type="text"
                   className="border border-gray-300 p-2 rounded w-full"
                   value={longBreak}
-                  onChange={(e) => setLongBreak(Number(e.target.value))}
+                  onChange={(e) => setLongBreak(e.target.value ? Number(e.target.value) : 0)}
                 />
               </div>
             </div>
@@ -79,7 +81,7 @@ export const TimeSettings: React.FC<TimeSettingsProps> = ({ setOpen, cancelButto
                 type="text"
                 className='border border-gray-300 p-2 rounded w-1/6'
                 value={longBreakInterval}
-                onChange={(e) => setLongBreakInterval(Number(e.target.value))}
+                onChange={(e) => setLongBreakInterval(e.target.value ? Number(e.target.value) : 0)}
               />
             </div>
           </div>
@@ -96,7 +98,10 @@ export const TimeSettings: React.FC<TimeSettingsProps> = ({ setOpen, cancelButto
         <button
           type="button"
           className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-          onClick={() => setOpen(false)}
+          onClick={() => {
+            setOpen(false)
+            resetEditedTime()
+          }}
           ref={cancelButtonRef}
         >
           Cancel

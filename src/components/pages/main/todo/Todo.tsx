@@ -4,10 +4,12 @@ import { TaskItem } from "./components/TodoItem"
 import { Card } from "../../../common/Card"
 import { Modal } from "../../../common/Modal"
 import { TodoModal } from "./components/TodoModal"
+import useStore from "../../../../store/task"
 
 export const Todo = () => {
   const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef(null)
+  const resetEditedTask = useStore((state) => state.resetEditedTask)
   const { data, isLoading } = useQueryTasks()
 
   return (
@@ -29,7 +31,7 @@ export const Todo = () => {
           </ul>
         )}
       </Card>
-      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef} type="todo">
+      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef} resetModal={resetEditedTask}>
         <TodoModal setOpen={setOpen} cancelButtonRef={cancelButtonRef} />
       </Modal>
     </>

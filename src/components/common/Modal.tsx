@@ -1,21 +1,19 @@
 import { Dialog, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
-import useStore from '../../store/task'
 
 type ModalProps = {
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   cancelButtonRef: React.RefObject<HTMLButtonElement>
   children: React.ReactNode
-  type: string | null
+  resetModal?: () => void
 }
 
-export const Modal: React.FC<ModalProps> = ({ open, setOpen, children, cancelButtonRef, type }) => {
-  const resetEditedTask = useStore((state) => state.resetEditedTask)
+export const Modal: React.FC<ModalProps> = ({ open, setOpen, children, cancelButtonRef, resetModal }) => {
   const handleClose = () => {
     setOpen(false)
-    if (type === "todo") {
-      resetEditedTask()
+    if (resetModal) {
+      resetModal()
     }
   }
   return (

@@ -15,6 +15,7 @@ const formatTime = (seconds: number) => {
 
 export const Pomodoro = () => {
   const getTimeSettings = useStore((state) => state.getTimeSettings)
+  const resetEditedTime = useStore((state) => state.resetEditedTime)
   const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef(null)
   const {
@@ -61,7 +62,7 @@ export const Pomodoro = () => {
           </button>
         </div>
       </Card>
-      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef}>
+      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef} resetModal={resetEditedTime}>
         <TimeSettings setOpen={setOpen} cancelButtonRef={cancelButtonRef} />
       </Modal>
     </>
