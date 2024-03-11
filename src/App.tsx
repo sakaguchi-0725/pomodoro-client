@@ -1,13 +1,8 @@
-import { useEffect } from "react";
+import { useEffect } from "react"
 import './App.css'
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import axios from 'axios'
-import { CsrfToken } from "./types";
-import { Signup } from "./components/pages/auth/Signup";
-import { Login } from "./components/pages/auth/Login";
-import { MainLayout } from "./components/layout/MainLayout";
-import Main from "./components/pages/main/Main";
-import Report from "./components/pages/report/Report";
+import { CsrfToken } from "./types"
+import Router from "./router"
 
 function App() {
   useEffect(() => {
@@ -22,15 +17,8 @@ function App() {
   }, [])
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<MainLayout children={<Main />} />} />
-        <Route path="/report" element={<MainLayout children={<Report />} />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    <Router />
+  )
 }
 
 export default App;
