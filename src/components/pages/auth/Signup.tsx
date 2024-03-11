@@ -25,11 +25,14 @@ export const Signup = () => {
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
+          <div className="flex justify-center items-center">
+            <img
+              className="h-9"
+              src="src/assets/logo.png"
+              alt="Your Company"
+            />
+            <h2 className="text-xl ml-2 font-bold">Pomodoro</h2>
+          </div>
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             サインアップ
           </h2>
