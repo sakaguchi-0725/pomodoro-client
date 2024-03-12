@@ -26,8 +26,13 @@ export type Report = {
 }
 
 export type DailyReport = {
-  time: string
+  time: Date
   focus_time: number
+}
+
+export type FormattedDailyReport = {
+  time: string
+  focusTime: number
 }
 
 export type WeeklyReport = {

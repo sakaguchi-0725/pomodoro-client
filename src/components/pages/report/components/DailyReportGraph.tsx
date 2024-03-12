@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { DailyReport } from '../../../../types'
+import { FormattedDailyReport } from '../../../../types'
 import useStore from '../../../../store/report'
 import { Column } from '@ant-design/charts'
 
 type DailyConfig = {
-  data: DailyReport[]
+  data: FormattedDailyReport[]
   height: number
   xField: string
   yField: string
@@ -28,6 +28,7 @@ export const DailyReportGraph = () => {
   })
 
   useEffect(() => {
+    console.log(dailyReportData)
     if (dailyReportData.length > 0) {
       setDailyConfig(prevConfig => ({
         ...prevConfig,

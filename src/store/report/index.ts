@@ -1,9 +1,9 @@
 import { create } from 'zustand'
-import { DailyReport, FormattedWeeklyReport } from '../../types'
+import { FormattedDailyReport, FormattedWeeklyReport } from '../../types'
 
 type State = {
-  dailyReportData: DailyReport[]
-  updateDailyReport: (payload: DailyReport[]) => void,
+  dailyReportData: FormattedDailyReport[]
+  updateDailyReport: (payload: FormattedDailyReport[]) => void,
   resetDailyReportData: () => void
   weeklyReportData: FormattedWeeklyReport[]
   addWeeklyReportData: (payload: FormattedWeeklyReport[]) => void

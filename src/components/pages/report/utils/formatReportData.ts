@@ -1,4 +1,4 @@
-import { FormattedWeeklyReport, FormattedWeeklyReportItem, WeeklyReport } from "../../../../types"
+import { DailyReport, FormattedDailyReport, FormattedWeeklyReport, FormattedWeeklyReportItem, WeeklyReport } from "../../../../types"
 import { parseISO, format, startOfWeek, endOfWeek, addDays, eachDayOfInterval } from 'date-fns'
 
 export const formatWeeklyReportData = (data: WeeklyReport[], startDateStr: string, endDateStr: string): FormattedWeeklyReport[] => {
@@ -31,4 +31,21 @@ export const formatWeeklyReportData = (data: WeeklyReport[], startDateStr: strin
   }
 
   return result.sort((a, b) => parseISO(b.startDate).getTime() - parseISO(a.startDate).getTime())
+}
+
+export const formatDailyReportData = (data: DailyReport[]): FormattedDailyReport[] => {
+  const aggregatedData: Record<string, number> = {};
+  for (let hour = 0; hour < 24; hour++) {
+    aggregatedData[`${hour}:00`] = 0;
+  }
+
+  data.forEach((item) => {
+    const hour = format(parseISO(String(item.time)), 'HH:00')
+    aggregatedData[hour] += item.focus_time
+  })
+
+  return Object.entries(aggregatedData).map(([time, focusTime]) => ({
+    time,
+    focusTime,
+  }))
 }

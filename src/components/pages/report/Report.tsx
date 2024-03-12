@@ -2,7 +2,7 @@ import { Card } from '../../common/Card'
 import { useQueryReport } from '../../../hooks/time/useQueryReport'
 import { useEffect, useState } from 'react'
 import { ReportParams } from '../../../types'
-import { formatWeeklyReportData } from './utils/formatReportData'
+import { formatDailyReportData, formatWeeklyReportData } from './utils/formatReportData'
 import { WeeklyReportGraph } from './components/WeeklyReportGraph'
 import { getEndDate, getNextStartDate } from './utils/reportDateUtils'
 import useStore from '../../../store/report'
@@ -33,6 +33,7 @@ const Report = () => {
   }
 
   const addWeeklyReportData = useStore((state) => state.addWeeklyReportData)
+  const updateDailyReport = useStore((state) => state.updateDailyReport)
   
   const { data, isLoading } = useQueryReport(reportParams)
   useEffect(() => {
@@ -43,6 +44,11 @@ const Report = () => {
       } else {
         const formattedData = formatWeeklyReportData([], startDate, endDate)
         addWeeklyReportData(formattedData)
+      }
+
+      if (data?.daily_report) {
+        const formattedData = formatDailyReportData(data.daily_report)
+        updateDailyReport(formattedData)
       }
     }
   }, [data])
