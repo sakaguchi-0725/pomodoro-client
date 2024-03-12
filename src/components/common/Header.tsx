@@ -20,7 +20,7 @@ export function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex items-center lg:flex-1">
           <a href="/pomodoro" className="flex items-center -m-1.5 p-1.5">
-            <img className="h-10 w-auto mr-2" src="src/assets/logo.png" alt="Pomodoro Logo" />
+            <img className="h-10 w-auto mr-2" src="public/assets/logo.png" alt="Pomodoro Logo" />
             <span className="text-lg font-medium">Pomodoro</span>
           </a>
         </div>

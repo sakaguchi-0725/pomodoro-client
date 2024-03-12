@@ -20,7 +20,7 @@ export const Login = () => {
           <div className="flex justify-center items-center">
             <img
               className="h-9"
-              src="src/assets/logo.png"
+              src="public/assets/logo.png"
               alt="Your Company"
             />
             <h2 className="text-xl ml-2 font-bold">Pomodoro</h2>

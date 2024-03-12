@@ -4,7 +4,7 @@ import useNotification from "../useNotification";
 
 const useCompleteTimer = () => {
   const sendNotification = useNotification()
-  const audioRef = useRef(new Audio("src/assets/complete_bgm.mp3"))
+  const audioRef = useRef(new Audio("public/assets/complete_bgm.mp3"))
 
   const sendCompleteNotification = (timerType: TimerType) => {
     const notificationMessage = {
