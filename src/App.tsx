@@ -3,6 +3,7 @@ import './App.css'
 import axios from 'axios'
 import { CsrfToken } from "./types"
 import Router from "./router"
+import { BrowserRouter } from "react-router-dom"
 
 function App() {
   useEffect(() => {
@@ -17,7 +18,9 @@ function App() {
   }, [])
 
   return (
-    <Router />
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   )
 }
 
