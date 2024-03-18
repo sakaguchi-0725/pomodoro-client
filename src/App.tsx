@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Auth } from "./components/Auth";
-import { Todo } from "./components/Todo";
+import { useEffect } from "react"
+import './App.css'
 import axios from 'axios'
-import { CsrfToken } from "./types";
+import { CsrfToken } from "./types"
+import Router from "./router"
+import { BrowserRouter } from "react-router-dom"
 
 function App() {
   useEffect(() => {
@@ -19,12 +19,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Auth />} />
-        <Route path="/todo" element={<Todo />} />
-      </Routes>
+      <Router />
     </BrowserRouter>
-  );
+  )
 }
 
 export default App;
